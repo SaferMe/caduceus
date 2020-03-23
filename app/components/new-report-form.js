@@ -3,6 +3,7 @@ import { action, set } from "@ember/object";
 
 const FieldsMapping = {
   'ShortTextBox': 'string',
+  'LongTextBox': 'text',
 }
 
 export default class NewReportFormComponent extends Component {

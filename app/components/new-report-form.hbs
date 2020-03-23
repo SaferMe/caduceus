@@ -1,8 +1,12 @@
 <FormBuilder @for={{this.formData}} @action={{fn this.send}} as |f|>
 
   {{#each this.sortedFields as |field|}}
-    <f.input @attr={{field.key}} @as={{field.fieldType}} @label={{field.label}} />
-    <hr>
+    <f.input
+      @attr={{field.key}}
+      @as={{field.fieldType}}
+      @label={{field.label}}
+      @collection={{field.optionCollection}}
+    />
   {{/each}}
 
   <f.submit />

@@ -5,7 +5,7 @@ import fetch from 'fetch';
 const FieldsMapping = {
   // 'BulletedList': {inputType: 'pending'},
   // 'Category': {inputType: 'pending'},
-  'CheckBox': {inputType: 'multi-checkboxes'},
+  'CheckBox': {inputType: 'checkboxes'},
   // 'DateAndTime': {inputType: 'pending'},
   'DropDown': {inputType: 'collection'},
   // 'FileUpload': {inputType: 'pending'},
@@ -14,7 +14,7 @@ const FieldsMapping = {
   // 'IntegerRange': {inputType: 'pending'},
   'LongTextBox': {inputType: 'text'},
   // 'NumberedList': {inputType: 'pending'},
-  'RadioButton': {inputType: 'radio-select'},
+  'RadioButton': {inputType: 'checkboxes'},
   // 'RelativePosition': {inputType: 'not needed'},
   // 'ReportState': {inputType: 'pending'},
   // 'ReportViewers': {inputType: 'not needded'},

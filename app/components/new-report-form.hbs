@@ -1,3 +1,12 @@
-<button type="button" {{on 'click' (fn this.send)}}>Send</button>
+<FormBuilder @for={{this.formData}} @action={{fn this.send}} as |f|>
+
+  {{#each this.sortedFields as |field|}}
+    <f.input @attr={{field.key}} @as={{field.fieldType}} @label={{field.label}} />
+    <hr>
+  {{/each}}
+
+  <f.submit />
+
+</FormBuilder>
 
 {{yield}}

@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 
 const FieldTypeMapping = {
+  "ShortTextBox": "channel-form/short-text-field",
 };
 
 export default class ChannelFormFormFieldComponent extends Component {

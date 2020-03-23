@@ -10,7 +10,7 @@ const FieldsMapping = {
   // 'DateAndTime': {inputType: 'pending'},
   'DropDown': {inputType: 'collection'},
   // 'FileUpload': {inputType: 'pending'},
-  'FreeText': {inputType: 'informational-text', dontSend: true, unescapeLabel: true},
+  'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true},
   // 'Image': {inputType: 'pending'},
   // 'IntegerRange': {inputType: 'pending'},
   'LongTextBox': {inputType: 'text'},
@@ -22,7 +22,7 @@ const FieldsMapping = {
   // 'RiskMatrix': {inputType: 'pending'},
   'SectionBreak': {inputType: 'section-break', hideLabel: true, dontSend: true},
   'ShortTextBox': {inputType: 'string'},
-  // 'Signature': {inputType: 'pending'},
+  'Signature': {inputType: 'void', dontSend: true, hideLabel: true},
   // 'TextWithSuggestions': {inputType: 'pending'},
 }
 

@@ -11,6 +11,10 @@
 
   <f.submit />
 
+  {{#if f.builder.isLoading}}
+    Sending data...
+  {{/if}}
+
 </FormBuilder>
 
 {{yield}}

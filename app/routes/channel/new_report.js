@@ -1,11 +1,12 @@
 import Route from '@ember/routing/route';
 import fetch from 'fetch';
+import ENV from 'shield/config/environment'
 
 export default class NewReportRoute extends Route {
   async model(params) {
     const channel = this.modelFor('channel');
     const response = await fetch(
-      `http://localhost:3000/api/v4/channels/${channel.id}/form`,
+      `${ENV.apiHost}/api/v4/channels/${channel.id}/form`,
       {
         headers: {
           'Content-Type': 'application/json',

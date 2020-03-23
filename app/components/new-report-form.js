@@ -3,6 +3,8 @@ import { action, get, getWithDefault, set } from "@ember/object";
 import fetch from 'fetch';
 import {inject as service} from '@ember/service';
 
+import ENV from 'shield/config/environment'
+
 const FieldsMapping = {
   // 'BulletedList': {inputType: 'pending'},
   // 'Category': {inputType: 'pending'},
@@ -83,7 +85,7 @@ export default class NewReportFormComponent extends Component {
     let report, errors;
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v4/reports`,
+        `${ENV.apiHost}/api/v4/reports`,
         {
           method: 'POST',
           headers: {

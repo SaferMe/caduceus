@@ -1,10 +1,11 @@
 import Route from '@ember/routing/route';
 import fetch from 'fetch';
+import ENV from 'shield/config/environment'
 
 export default class ChannelRoute extends Route {
   async model(params) {
     const response = await fetch(
-      `http://localhost:3000/api/v4/channels/${params.channelId}`,
+      `${ENV.apiHost}/api/v4/channels/${params.channelId}`,
       {
         headers: {
           'Content-Type': 'application/json',

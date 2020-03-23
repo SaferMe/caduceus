@@ -9,5 +9,6 @@ export default class Router extends EmberRouter {
 Router.map(function() {
   this.route('channel', {path: '/channel/:channelId'}, function() {
     this.route('new_report');
+    this.route('report_created');
   });
 });

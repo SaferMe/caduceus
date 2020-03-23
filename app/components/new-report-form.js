@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action, get, getWithDefault, set } from "@ember/object";
 import fetch from 'fetch';
+import {inject as service} from '@ember/service';
 
 const FieldsMapping = {
   // 'BulletedList': {inputType: 'pending'},
@@ -26,6 +27,8 @@ const FieldsMapping = {
 }
 
 export default class NewReportFormComponent extends Component {
+  @service router;
+
   formData = {};
   constructor(owner, args) {
     super(owner, args);
@@ -95,6 +98,7 @@ export default class NewReportFormComponent extends Component {
       );
       if (response.ok) {
         report = await response.json();
+        this.router.transitionTo('channel.report_created')
       }
       else if (response.status === 422) {
         // validation errors

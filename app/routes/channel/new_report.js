@@ -16,6 +16,6 @@ export default class NewReportRoute extends Route {
       }
     );
     const form = await response.json();
-    return {channel: channel, fields: form.fields};
+    return {channel: channel, fields: form.fields.filterBy('editable')};
   }
 }

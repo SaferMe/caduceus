@@ -54,7 +54,6 @@ export default class NewReportFormComponent extends Component {
         const optionCollection = getWithDefault(f.data, 'options', []).filterBy('enabled').sortBy('display_order');
         optionCollection.forEach((option) => {
           option.content = option.value;
-          this.formData[f.key]
         });
         let label;
         if (fieldDef.hideLabel) {

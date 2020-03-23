@@ -3,9 +3,9 @@ import fetch from 'fetch';
 
 export default class NewReportRoute extends Route {
   async model(params) {
-    const channelParams = this.paramsFor('channel')
+    const channel = this.modelFor('channel');
     const response = await fetch(
-      `http://localhost:3000/api/v4/channels/${channelParams.channelId}/form`,
+      `http://localhost:3000/api/v4/channels/${channel.id}/form`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -16,6 +16,6 @@ export default class NewReportRoute extends Route {
       }
     );
     const form = await response.json();
-    return form;
+    return {channel: channel, fields: form.fields};
   }
 }

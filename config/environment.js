@@ -36,6 +36,7 @@ module.exports = function(environment) {
 
   ENV['place-autocomplete'] = {
     key: process.env.AUTOCOMPLETE_API_KEY || 'You_need_a_google_api_key_here',
+    region: 'NZ' // Optional
   };
 
   if (environment === 'test') {

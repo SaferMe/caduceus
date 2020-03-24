@@ -34,9 +34,13 @@ export default class NewReportFormComponent extends Component {
   @service router;
 
   validations = {
+    geom: [validator('presence', true)],
+    // address: [validator('presence', true)],
   };
 
   formData = null;
+  showAddressError = false;
+
   constructor(owner, args) {
     super(owner, args);
 

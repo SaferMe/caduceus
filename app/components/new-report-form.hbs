@@ -1,9 +1,22 @@
 <FormBuilder @for={{this.formData}} @action={{fn this.send}} as |f|>
 
-  <PlaceAutocompleteField @placeChangedCallback={{this.addressUpdated}} />
-  <div class="">
-    <p>geom: {{this.formData.geom}}</p>
-    <p>address: {{this.formData.address}}</p>
+  <div class="form-group">
+    <label for="address_field"><abbr title="Required">*</abbr>
+      Address
+    </label>
+    <div class="field">
+      <PlaceAutocompleteField
+        @placeChangedCallback={{this.addressUpdated}}
+        @onBlurCallback={{action (mut this.showAddressError) true}}
+      />
+    </div>
+    {{#if this.showAddressError}}
+      {{#if (v-get this.formData 'geom' 'isInvalid')}}
+        <div class="invalid-feedback">
+          This field can't be blank
+        </div>
+      {{/if}}
+    {{/if}}
   </div>
 
   {{#each this.sortedFields as |field|}}

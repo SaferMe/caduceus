@@ -1,0 +1,51 @@
+.form-group .form-group-input-wrapper .place-autocomplete--input,
+.form-group .form-control {
+  @apply text-sm py-2 border rounded bg-gray-200 px-4 mt-2 w-full;
+}
+
+.form-group .form-group-input-wrapper.is-invalid .place-autocomplete--input,
+.form-group .form-control.is-invalid {
+  @apply border-red-300;
+}
+
+.form-group .form-group-input-wrapper .place-autocomplete--input:focus,
+.form-group .form-control:focus {
+  @apply outline-none;
+  @apply shadow-outline;
+}
+
+.form-group {
+  @apply my-4;
+}
+
+.form-group label {
+  @apply font-bold uppercase text-xs;
+}
+
+.form-group .section-break-ruler {
+  @apply border-gray-500 border-t-2 my-6;
+}
+
+.unstyled-wrapper label {
+  @apply text-sm;
+}
+
+.form-group .form-control label {
+  @apply normal-case text-sm font-normal my-1 inline-block;
+}
+
+.form-group .form-control input[type=checkbox],
+.form-group .form-control input[type=radio] {
+  @apply mr-1;
+}
+
+.form-group .invalid-feedback {
+  @apply text-sm text-red-500 mt-1;
+}
+
+.btn.-primary {
+  @apply text-xs uppercase bg-blue-700 text-white py-2 px-8 rounded my-4;
+}
+.btn.-primary:hover {
+  @apply bg-blue-500;
+}

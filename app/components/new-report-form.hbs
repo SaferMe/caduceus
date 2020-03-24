@@ -1,14 +1,16 @@
-<FormBuilder @for={{this.formData}} @action={{fn this.send}} as |f|>
+<FormBuilder @for={{this.formData}} @action={{fn this.send}} novalidate as |f|>
 
   <div class="form-group">
-    <label for="address_field"><abbr title="Required">*</abbr>
+    <label for="address_field" class="font-bold uppercase text-xs"><abbr title="Required">*</abbr>
       Address
     </label>
     <div class="field">
       <PlaceAutocompleteField
         @placeChangedCallback={{this.addressUpdated}}
         @onBlurCallback={{action (mut this.showAddressError) true}}
+        class="form-group-input-wrapper {{if this.showAddressError (if (v-get this.formData 'geom' 'isInvalid') 'is-invalid')}}"
       />
+      {{this.formData.address}}
     </div>
     {{#if this.showAddressError}}
       {{#if (v-get this.formData 'geom' 'isInvalid')}}
@@ -29,7 +31,7 @@
     />
   {{/each}}
 
-  <f.submit />
+  <f.submit class="btn -primary" />
 
   {{#if f.builder.isLoading}}
     Sending data...

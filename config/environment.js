@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'shield',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -23,7 +23,7 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.apiHost = "https://public-api.saferme.com";
+  ENV.apiHost = "https://public-api.thundermaps.com";
 
   if (environment === 'development') {
     ENV.apiHost = "http://localhost:3000";

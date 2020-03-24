@@ -1,0 +1,9 @@
+<div class="unstyled-wrapper">
+  {{component @labelComponent}}
+  <div>
+    {{component @inputComponent}}
+  </div>
+  {{#if @config.validations.errors}}
+    <div>{{@config.validations.errors}}</div>
+  {{/if}}
+</div>

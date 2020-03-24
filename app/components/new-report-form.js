@@ -14,7 +14,7 @@ const FieldsMapping = {
   // 'DateAndTime': {inputType: 'pending'},
   'DropDown': {inputType: 'collection'},
   // 'FileUpload': {inputType: 'pending'},
-  'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true},
+  'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true, wrapper: 'unstyled'},
   // 'Image': {inputType: 'pending'},
   // 'IntegerRange': {inputType: 'pending'},
   'LongTextBox': {inputType: 'text'},
@@ -87,8 +87,9 @@ export default class NewReportFormComponent extends Component {
           }
         }
         const fieldType = fieldDef.inputType;
+        const wrapper = fieldDef.wrapper || 'default';
 
-        return {...f, label, fieldType, optionCollection};
+        return {...f, label, fieldType, wrapper, optionCollection};
       }
     }).compact().sortBy('form_order');
   }

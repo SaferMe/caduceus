@@ -9,6 +9,7 @@
         @placeChangedCallback={{this.addressUpdated}}
         @onBlurCallback={{action (mut this.showAddressError) true}}
         @inputClass="form-control {{if this.showAddressError (if (v-get this.formData 'geom' 'isInvalid') 'is-invalid')}}"
+        @withGeoLocate="true"
       />
     </div>
     {{#if this.showAddressError}}

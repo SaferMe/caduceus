@@ -1,14 +1,11 @@
-.form-group .form-group-input-wrapper .place-autocomplete--input,
 .form-group .form-control {
   @apply text-sm py-2 border rounded bg-gray-200 px-4 mt-2 w-full;
 }
 
-.form-group .form-group-input-wrapper.is-invalid .place-autocomplete--input,
 .form-group .form-control.is-invalid {
   @apply border-red-300;
 }
 
-.form-group .form-group-input-wrapper .place-autocomplete--input:focus,
 .form-group .form-control:focus {
   @apply outline-none;
   @apply shadow-outline;

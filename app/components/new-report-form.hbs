@@ -8,9 +8,8 @@
       <PlaceAutocompleteField
         @placeChangedCallback={{this.addressUpdated}}
         @onBlurCallback={{action (mut this.showAddressError) true}}
-        class="form-group-input-wrapper {{if this.showAddressError (if (v-get this.formData 'geom' 'isInvalid') 'is-invalid')}}"
+        @inputClass="form-control {{if this.showAddressError (if (v-get this.formData 'geom' 'isInvalid') 'is-invalid')}}"
       />
-      {{this.formData.address}}
     </div>
     {{#if this.showAddressError}}
       {{#if (v-get this.formData 'geom' 'isInvalid')}}

@@ -75,12 +75,18 @@ export default class NewReportFormComponent extends Component {
   }
 
   @action
+  addressUpdated(place) {
+    const geom = `Point(${place.geometry.location.lng()} ${place.geometry.location.lat()})`;
+    const address = place.formatted_address;
+    set(this.formData, 'geom', geom);
+    set(this.formData, 'address', address);
+  }
+
+  @action
   async send() {
     console.log("sending", {channel: this.args.channel, fields: this.args.fields});
     const body = Object.assign({}, this.formData, {
       account_id: this.args.channel.id,
-      geom: "Point(174.868709 -41.213559)",
-      address: "lat: -41.213559, long: 174.868709",
     });
     let report, errors;
     try {

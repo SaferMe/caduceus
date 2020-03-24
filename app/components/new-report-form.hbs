@@ -1,5 +1,11 @@
 <FormBuilder @for={{this.formData}} @action={{fn this.send}} as |f|>
 
+  <PlaceAutocompleteField @placeChangedCallback={{this.addressUpdated}} />
+  <div class="">
+    <p>geom: {{this.formData.geom}}</p>
+    <p>address: {{this.formData.address}}</p>
+  </div>
+
   {{#each this.sortedFields as |field|}}
     <f.input
       @attr={{field.key}}

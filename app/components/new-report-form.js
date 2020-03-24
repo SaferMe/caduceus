@@ -2,6 +2,8 @@ import Component from '@glimmer/component';
 import { action, get, getWithDefault, set } from "@ember/object";
 import fetch from 'fetch';
 import {inject as service} from '@ember/service';
+import { validator, buildValidations } from 'ember-cp-validations';
+import EmberObject from '@ember/object';
 
 import ENV from 'shield/config/environment'
 
@@ -31,22 +33,35 @@ const FieldsMapping = {
 export default class NewReportFormComponent extends Component {
   @service router;
 
-  formData = {};
+  validations = {
+  };
+
+  formData = null;
   constructor(owner, args) {
     super(owner, args);
+
+    let fd = {account_id: this.args.channel.id};
 
     this.args.fields.forEach((f) => {
       const fieldDef = FieldsMapping[f.field_type] || {};
       const sendField = !get(fieldDef, 'dontSend');
       if (sendField) {
         if (get(f.data, 'multi_select')) {
-          set(this.formData, f.key, f.value || []);
+          if (f.mandatory) {
+            this.validations[f.key] = [validator('collection', true), validator('presence', true)];
+          }
+          set(fd, f.key, f.value || Ember.A());
         }
         else {
-          set(this.formData, f.key, f.value);
+          if (f.mandatory) {
+            this.validations[f.key] = [validator('presence', true)];
+          }
+          set(fd, f.key, f.value);
         }
       }
-    })
+    });
+
+    this.formData = EmberObject.extend(buildValidations(this.validations)).create(Ember.getOwner(this).ownerInjection(), fd);
   }
 
   get sortedFields() {
@@ -84,10 +99,13 @@ export default class NewReportFormComponent extends Component {
 
   @action
   async send() {
+    const {validations} = await this.formData.validate();
+    if (validations.isInvalid) {
+      return
+    }
+
     console.log("sending", {channel: this.args.channel, fields: this.args.fields});
-    const body = Object.assign({}, this.formData, {
-      account_id: this.args.channel.id,
-    });
+    const body = Object.assign({}, this.formData);
     let report, errors;
     try {
       const response = await fetch(

@@ -39,6 +39,10 @@ module.exports = function(environment) {
     region: 'NZ' // Optional
   };
 
+  ENV['formBuilder'] = {
+    validationsAddon: 'ember-cp-validations',
+  };
+
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';

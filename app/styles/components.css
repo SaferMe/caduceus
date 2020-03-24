@@ -46,3 +46,10 @@
 .btn.-primary:hover {
   @apply bg-blue-500;
 }
+
+.btn.-plain {
+  @apply text-xs uppercase bg-transparent text-blue-500 py-2 px-0 rounded my-4;
+}
+.btn.-plain:hover {
+  @apply underline;
+}

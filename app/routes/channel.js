@@ -4,18 +4,10 @@ import ENV from 'shield/config/environment'
 
 export default class ChannelRoute extends Route {
   async model(params) {
-    const response = await fetch(
-      `${ENV.apiHost}/api/v4/channels/${params.channelId}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token token=public',
-          'X-AppId': 'com.thundermaps.saferme',
-          'X-InstallationId': 'generic-public-access',
-        }
-      }
-    );
+    let [channelId, webFormToken] = params.channelId.split('-');
+    const response = await fetch(`${ENV.apiHost}/api/x1/channels/${channelId}?web_form_token=${webFormToken}`);
     const channel = await response.json();
+    channel.webFormToken = webFormToken;
     return channel;
   }
 }

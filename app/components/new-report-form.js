@@ -113,25 +113,33 @@ export default class NewReportFormComponent extends Component {
       return
     }
 
-    console.log("sending", {channel: this.args.channel, fields: this.args.fields});
-    const body = Object.assign({}, this.formData);
-    let report, errors;
+    // console.log("sending", {channel: this.args.channel, fields: this.args.fields});
+    let {account_id, geom, address, ...customFields} = this.formData;
+    let custom_field_values = [];
+    const ignoredKeys = ['_super', '_oldWillDestroy', 'willDestroy'];
+    Object.keys(customFields).forEach((key) => {
+      if (ignoredKeys.includes(key)) {
+        return;
+      }
+      custom_field_values.push({key: key, value: customFields[key]});
+    })
+
+    const report = {account_id, geom, address, custom_field_values};
+
+    let errors;
     try {
       const response = await fetch(
-        `${ENV.apiHost}/api/v4/reports`,
+        `${ENV.apiHost}/api/x1/reports?web_form_token=${this.args.channel.webFormToken}`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Token token=public',
-            'X-AppId': 'com.thundermaps.saferme',
-            'X-InstallationId': 'generic-public-access',
           },
-          body: JSON.stringify(body),
+          body: JSON.stringify({report}),
         }
       );
       if (response.ok) {
-        report = await response.json();
+        let data = await response.json();
         this.router.transitionTo('channel.report_created')
       }
       else if (response.status === 422) {

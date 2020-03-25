@@ -54,7 +54,7 @@ export default class NewReportFormComponent extends Component {
           if (f.mandatory) {
             this.validations[f.key] = [validator('collection', true), validator('presence', true)];
           }
-          set(fd, f.key, f.value || Ember.A());
+          set(fd, f.key, f.value || []);
         }
         else {
           if (f.mandatory) {
@@ -86,10 +86,10 @@ export default class NewReportFormComponent extends Component {
             label = label.htmlSafe();
           }
         }
-        const fieldType = fieldDef.inputType;
+        const inputType = fieldDef.inputType;
         const wrapper = fieldDef.wrapper || 'default';
 
-        return {...f, label, fieldType, wrapper, optionCollection};
+        return {...f, label, inputType, wrapper, optionCollection};
       }
     }).compact().sortBy('form_order');
   }

@@ -74,6 +74,11 @@ export default class NewReportFormComponent extends Component {
         optionCollection.forEach((option) => {
           option.content = option.value;
         });
+
+        if (fieldDef.inputType === 'collection') {
+          optionCollection.unshift({});
+        }
+
         let label;
         if (fieldDef.hideLabel) {
           label = false;

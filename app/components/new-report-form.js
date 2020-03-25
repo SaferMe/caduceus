@@ -46,21 +46,19 @@ export default class NewReportFormComponent extends Component {
 
     let fd = {account_id: this.args.channel.id};
 
-    this.args.fields.forEach((f) => {
-      const fieldDef = FieldsMapping[f.field_type] || {};
-      const sendField = !get(fieldDef, 'dontSend');
-      if (sendField) {
+    this.sortedFields.forEach((f) => {
+      if (!f.dontSend) {
         if (get(f.data, 'multi_select')) {
           if (f.mandatory) {
             this.validations[f.key] = [validator('collection', true), validator('presence', true)];
           }
-          set(fd, f.key, f.value || []);
+          set(fd, f.key, f.value || f.optionCollection.filterBy('is_default').mapBy('value'));
         }
         else {
           if (f.mandatory) {
             this.validations[f.key] = [validator('presence', true)];
           }
-          set(fd, f.key, f.value);
+          set(fd, f.key, f.value || (f.optionCollection.findBy('is_default') || {}).value);
         }
       }
     });
@@ -88,8 +86,9 @@ export default class NewReportFormComponent extends Component {
         }
         const inputType = fieldDef.inputType;
         const wrapper = fieldDef.wrapper || 'default';
+        const dontSend = fieldDef.dontSend || false;
 
-        return {...f, label, inputType, wrapper, optionCollection};
+        return {...f, label, inputType, dontSend, wrapper, optionCollection};
       }
     }).compact().sortBy('form_order');
   }

@@ -56,7 +56,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/shield-demo/';
+    ENV.rootURL = '/caduceus/';
     // here you can enable a production-specific feature
   }
 

@@ -113,7 +113,6 @@ export default class NewReportFormComponent extends Component {
       return
     }
 
-    // console.log("sending", {channel: this.args.channel, fields: this.args.fields});
     let {account_id, geom, address, ...customFields} = this.formData;
     let custom_field_values = [];
     const ignoredKeys = ['_super', '_oldWillDestroy', 'willDestroy'];

@@ -69,7 +69,7 @@ export default class NewReportFormComponent extends Component {
   get sortedFields() {
     return this.args.fields.map((f) => {
       const fieldDef = FieldsMapping[f.field_type];
-      if (fieldDef) {
+      if (fieldDef && f.field_visibility == "public") {
         const optionCollection = getWithDefault(f.data, 'options', []).filterBy('enabled').sortBy('display_order');
         optionCollection.forEach((option) => {
           option.content = option.value;

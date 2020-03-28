@@ -5,11 +5,37 @@
 .form-group .ember-power-select-trigger {
   min-height: 2.45rem;
   @apply leading-snug;
+  padding-right: 42px;
 }
+.form-group .ember-power-select-trigger .ember-power-select-status-icon {
+  width: 11.314px;
+  height: 11.314px;
+  top: -4px;
+  right: 19px;
+  border: 1px solid black;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
 .form-group .ember-power-select-trigger .ember-power-select-selected-item,
 .form-group .ember-power-select-trigger .ember-basic-dropdown-content-placeholder,
 .form-group .ember-power-select-trigger .ember-power-select-placeholder {
-  @apply m-0;
+  @apply m-0 leading-normal;
+}
+
+.form-group .ember-power-select-trigger .ember-power-select-clear-btn {
+  top: 6px;
+  right: 44px;
+  font-size: 1.25rem;
+}
+.form-group .ember-power-select-trigger .ember-power-select-clear-btn:after {
+  content: "";
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: -4px;
+  left: -12px;
 }
 
 .form-group .form-control.is-invalid {
@@ -20,6 +46,11 @@
 .form-group .ember-power-select-trigger--active {
   @apply outline-none;
   @apply shadow-outline;
+}
+
+.form-group .ember-power-select-trigger.ember-basic-dropdown-trigger--below .ember-power-select-status-icon {
+  transform: rotate(225deg);
+  top: 8px;
 }
 
 .form-group {

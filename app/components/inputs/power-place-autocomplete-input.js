@@ -7,6 +7,7 @@ import { resolve } from 'rsvp';
 import { inject as service } from '@ember/service';
 
 export default class NewReportFormComponent extends Component {
+  minSearchStringLength = 3;
   @service('google-place-autocomplete') googlePlaceAutocompleteService;
 
   constructor() {
@@ -42,13 +43,13 @@ export default class NewReportFormComponent extends Component {
 
   @action
   searchPlaces(placeServiceInput) {
-    if (isBlank(placeServiceInput)) {
+    if (isBlank(placeServiceInput) || placeServiceInput.length < this.minSearchStringLength) {
       return [];
     }
     let properties = {
       input: placeServiceInput,
       types: ["address"],
-      offset: 3,
+      offset: this.minSearchStringLength,
     };
     return this.googlePlaceAutocompleteService.getPlacePredictions(properties);
   }

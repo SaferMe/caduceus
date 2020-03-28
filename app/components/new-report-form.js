@@ -12,7 +12,7 @@ const FieldsMapping = {
   // 'Category': {inputType: 'pending'},
   'CheckBox': {inputType: 'checkboxes'},
   // 'DateAndTime': {inputType: 'pending'},
-  'DropDown': {inputType: 'collection'},
+  'DropDown': {inputType: 'power-collection'},
   // 'FileUpload': {inputType: 'pending'},
   'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true, wrapper: 'unstyled'},
   // 'Image': {inputType: 'pending'},
@@ -41,8 +41,8 @@ export default class NewReportFormComponent extends Component {
   formData = null;
   showAddressError = false;
 
-  constructor(owner, args) {
-    super(owner, args);
+  constructor() {
+    super(...arguments);
 
     let fd = {account_id: this.args.channel.id};
 

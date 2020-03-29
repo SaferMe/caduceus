@@ -1,25 +1,10 @@
 <FormBuilder @for={{this.formData}} @action={{fn this.send}} novalidate class="-mb-12" as |f|>
 
-  <div class="form-group">
-    <label for="address_field" class="font-bold uppercase text-xs"><abbr title="Required">*</abbr>
-      Address
-    </label>
-    <div class="field">
-      <PlaceAutocompleteField
-        @placeChangedCallback={{this.addressUpdated}}
-        @onBlurCallback={{action (mut this.showAddressError) true}}
-        @inputClass="form-control {{if this.showAddressError (if (v-get this.formData 'geom' 'isInvalid') 'is-invalid')}}"
-        @withGeoLocate="true"
-      />
-    </div>
-    {{#if this.showAddressError}}
-      {{#if (v-get this.formData 'geom' 'isInvalid')}}
-        <div class="invalid-feedback">
-          This field can't be blank
-        </div>
-      {{/if}}
-    {{/if}}
-  </div>
+  <f.input
+    @attr="place"
+    @as="power-place-autocomplete"
+    @label="Address"
+  />
 
   {{#each this.sortedFields as |field|}}
     <f.input

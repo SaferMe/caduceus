@@ -1,0 +1,9 @@
+<PowerSelect
+  @searchEnabled={{true}}
+  @search={{action this.searchPlaces}}
+  @selected={{this.selectedItem}}
+  @onChange={{action this.select}}
+  @placeholder="Enter a location"
+  as |prediction|>
+  {{prediction.description}}
+</PowerSelect>

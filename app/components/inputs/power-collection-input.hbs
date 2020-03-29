@@ -1,0 +1,9 @@
+<PowerSelect
+  @options={{this.resolvedCollection}}
+  @onChange={{action this.select}}
+  @selected={{this.selectedItem}}
+  @allowClear={{this.notRequired}}
+  @placeholder="Please select an option"
+  as |option|>
+  {{option.label}}
+</PowerSelect>

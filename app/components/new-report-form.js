@@ -12,7 +12,7 @@ const FieldsMapping = {
   // 'Category': {inputType: 'pending'},
   'CheckBox': {inputType: 'checkboxes'},
   // 'DateAndTime': {inputType: 'pending'},
-  'DropDown': {inputType: 'collection'},
+  'DropDown': {inputType: 'power-collection'},
   // 'FileUpload': {inputType: 'pending'},
   'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true, wrapper: 'unstyled'},
   // 'Image': {inputType: 'pending'},
@@ -34,15 +34,13 @@ export default class NewReportFormComponent extends Component {
   @service router;
 
   validations = {
-    geom: [validator('presence', true)],
-    // address: [validator('presence', true)],
+    place: [validator('presence', true)],
   };
 
   formData = null;
-  showAddressError = false;
 
-  constructor(owner, args) {
-    super(owner, args);
+  constructor() {
+    super(...arguments);
 
     let fd = {account_id: this.args.channel.id};
 
@@ -99,21 +97,13 @@ export default class NewReportFormComponent extends Component {
   }
 
   @action
-  addressUpdated(place) {
-    const geom = `Point(${place.geometry.location.lng()} ${place.geometry.location.lat()})`;
-    const address = place.formatted_address;
-    set(this.formData, 'geom', geom);
-    set(this.formData, 'address', address);
-  }
-
-  @action
   async send() {
     const {validations} = await this.formData.validate();
     if (validations.isInvalid) {
       return
     }
 
-    let {account_id, geom, address, ...customFields} = this.formData;
+    let {account_id, place, ...customFields} = this.formData;
     let custom_field_values = [];
     const ignoredKeys = ['_super', '_oldWillDestroy', 'willDestroy'];
     Object.keys(customFields).forEach((key) => {
@@ -123,6 +113,8 @@ export default class NewReportFormComponent extends Component {
       custom_field_values.push({key: key, value: customFields[key]});
     })
 
+    const address = place.description;
+    const geom = `Point(${place.location.lng} ${place.location.lat})`;
     const report = {account_id, geom, address, custom_field_values};
 
     let errors;

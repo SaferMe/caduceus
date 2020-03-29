@@ -12,6 +12,21 @@ const purgeCSS = {
       './app/components/**/*.hbs',
       './app/templates/**/*.hbs',
     ],
+    whitelist: [
+      "ember-basic-dropdown-content-placeholder",
+      "ember-basic-dropdown-trigger--below",
+      "ember-power-select-clear-btn",
+      "ember-power-select-placeholder",
+      "ember-power-select-selected-item",
+      "ember-power-select-status-icon",
+      "ember-power-select-trigger--active",
+      "ember-power-select-trigger",
+      "form-control",
+      "form-group",
+      "invalid-feedback",
+      "is-invalid",
+      "type",
+    ],
     defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
   }
 }

@@ -16,7 +16,7 @@ const FieldsMapping = {
   // 'FileUpload': {inputType: 'pending'},
   'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true, wrapper: 'unstyled'},
   // 'Image': {inputType: 'pending'},
-  // 'IntegerRange': {inputType: 'pending'},
+  'IntegerRange': {inputType: 'range'},
   'LongTextBox': {inputType: 'text'},
   // 'NumberedList': {inputType: 'pending'},
   'RadioButton': {inputType: 'checkboxes'},
@@ -58,6 +58,16 @@ export default class NewReportFormComponent extends Component {
           }
           if (f.field_type === "DateAndTime" && get(f.data, 'default_to_current')) {
             set(fd, f.key, f.value || new Date().toJSON());
+          }
+          if (f.field_type === "IntegerRange") {
+            this.validations[f.key] = [
+              validator('number', {
+                integer: true,
+                gte: f.data.minimum,
+                lte: f.data.maximum,
+              })
+            ];
+            set(fd, f.key, f.value || f.data.default);
           }
           else {
             set(fd, f.key, f.value || (f.optionCollection.findBy('is_default') || {}).value);

@@ -11,7 +11,7 @@ const FieldsMapping = {
   // 'BulletedList': {inputType: 'pending'},
   // 'Category': {inputType: 'pending'},
   'CheckBox': {inputType: 'checkboxes'},
-  // 'DateAndTime': {inputType: 'pending'},
+  'DateAndTime': {inputType: 'datetime-local'},
   'DropDown': {inputType: 'power-collection'},
   // 'FileUpload': {inputType: 'pending'},
   'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true, wrapper: 'unstyled'},
@@ -56,7 +56,12 @@ export default class NewReportFormComponent extends Component {
           if (f.mandatory) {
             this.validations[f.key] = [validator('presence', true)];
           }
-          set(fd, f.key, f.value || (f.optionCollection.findBy('is_default') || {}).value);
+          if (f.field_type === "DateAndTime" && get(f.data, 'default_to_current')) {
+            set(fd, f.key, f.value || new Date().toJSON());
+          }
+          else {
+            set(fd, f.key, f.value || (f.optionCollection.findBy('is_default') || {}).value);
+          }
         }
       }
     });

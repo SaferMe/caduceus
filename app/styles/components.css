@@ -78,6 +78,18 @@
   @apply mr-1;
 }
 
+.form-group .form-control.ticked-range input[type=range] {
+  @apply w-full align-middle px-1;
+}
+
+.form-group .form-control.ticked-range datalist {
+  @apply flex justify-between text-xs;
+}
+
+.form-group .form-control.ticked-range datalist option {
+  @apply w-6 text-center;
+}
+
 .form-group .invalid-feedback {
   @apply text-sm text-red-500 mt-1;
 }

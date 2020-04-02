@@ -1,0 +1,7 @@
+<datalist id="{{this.elementId}}InputRangeTicks">
+  {{#each this.tickList as |tick|}}
+    <option>{{tick}}</option>
+  {{/each}}
+</datalist>
+
+<Inputs::RangeInput @config={{this.config}} id="{{this.elementId}}InputRange" list="{{this.elementId}}InputRangeTicks" />

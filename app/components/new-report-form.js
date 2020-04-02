@@ -16,7 +16,7 @@ const FieldsMapping = {
   // 'FileUpload': {inputType: 'pending'},
   'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true, wrapper: 'unstyled'},
   // 'Image': {inputType: 'pending'},
-  'IntegerRange': {inputType: 'range'},
+  'IntegerRange': {inputType: 'ticked-range'},
   'LongTextBox': {inputType: 'text'},
   // 'NumberedList': {inputType: 'pending'},
   'RadioButton': {inputType: 'checkboxes'},

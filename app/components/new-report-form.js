@@ -61,7 +61,7 @@ export default class NewReportFormComponent extends Component {
           if (f.field_type === "DateAndTime" && get(f.data, 'default_to_current')) {
             set(fd, f.key, f.value || new Date().toJSON());
           }
-          if (f.field_type === "IntegerRange") {
+          else if (f.field_type === "IntegerRange") {
             this.validations[f.key] = [
               validator('number', {
                 integer: true,

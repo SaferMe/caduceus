@@ -27,7 +27,9 @@ const FieldsMapping = {
   'SectionBreak': {inputType: 'section-break', hideLabel: true, dontSend: true},
   'ShortTextBox': {inputType: 'string'},
   'Signature': {inputType: 'void', dontSend: true, hideLabel: true},
-  // 'TextWithSuggestions': {inputType: 'pending'},
+
+  // missing suggestions
+  'TextWithSuggestions': {inputType: 'string'},
 }
 
 export default class NewReportFormComponent extends Component {

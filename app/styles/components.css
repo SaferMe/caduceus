@@ -78,6 +78,10 @@
   @apply mr-1;
 }
 
+.form-group .form-control.ticked-range .range-color {
+  @apply p-1 -mx-4 px-4 -mb-2 rounded-b;
+}
+
 .form-group .form-control.ticked-range input[type=range] {
   @apply w-full align-middle px-1;
 }

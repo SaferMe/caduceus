@@ -6,6 +6,12 @@ import { reads } from '@ember/object/computed';
 export default Ember.Component.extend({
   classNames: ["ticked-range"],
 
+  backgroundColor: computed('min', 'max', {
+    get() {
+      return this.config.color || "transparent";
+    }
+  }),
+
   tickList: computed('min', 'max', {
     get() {
       if (this.min >= this.max) {

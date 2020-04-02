@@ -4,4 +4,6 @@
   {{/each}}
 </datalist>
 
-<Inputs::RangeInput @config={{this.config}} id="{{this.elementId}}InputRange" list="{{this.elementId}}InputRangeTicks" />
+<div class="range-color" style="background-color: {{this.backgroundColor}}">
+  <Inputs::RangeInput @config={{this.config}} id="{{this.elementId}}InputRange" list="{{this.elementId}}InputRangeTicks" />
+</div>

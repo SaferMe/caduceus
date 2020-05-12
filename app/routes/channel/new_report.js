@@ -15,7 +15,13 @@ function extractFixedLocation(fixedLocationString) {
   if (isEmpty(fixedLocationString)) {
     return null;
   }
-  const [latStr, lngStr, description] = fixedLocationString.split(",");
+  const [latStr, lngStr] = fixedLocationString.split(",");
+  const lngStart = fixedLocationString.indexOf(',', 0);
+  const descriptionStart = fixedLocationString.indexOf(',', lngStart + 1);
+  let description;
+  if (lngStart != -1 && descriptionStart != -1)  {
+    description = fixedLocationString.slice(descriptionStart + 1);
+  }
   const lat = parseFloat(latStr);
   const lng = parseFloat(lngStr);
 

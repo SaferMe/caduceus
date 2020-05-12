@@ -35,14 +35,16 @@ const FieldsMapping = {
 export default class NewReportFormComponent extends Component {
   @service router;
 
-  validations = {
-    place: [validator('presence', true)],
-  };
+  validations = {};
 
   formData = null;
 
   constructor() {
     super(...arguments);
+
+    if(!this.args.fixedLocation) {
+      this.validations["place"] = [validator('presence', true)];
+    }
 
     let fd = {account_id: this.args.channel.id};
 
@@ -130,8 +132,16 @@ export default class NewReportFormComponent extends Component {
       custom_field_values.push({key: key, value: customFields[key]});
     })
 
-    const address = place.description;
-    const geom = `Point(${place.location.lng} ${place.location.lat})`;
+    let address;
+    let geom;
+    if (this.args.fixedLocation) {
+      address = this.args.fixedLocation.description;
+      geom = `Point(${this.args.fixedLocation.location.lng} ${this.args.fixedLocation.location.lat})`;
+    }
+    else {
+      address = place.description;
+      geom = `Point(${place.location.lng} ${place.location.lat})`;
+    }
     const report = {account_id, geom, address, custom_field_values};
 
     let errors;

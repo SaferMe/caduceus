@@ -1,10 +1,25 @@
 <FormBuilder @for={{this.formData}} @action={{fn this.send}} novalidate class="-mb-12" as |f|>
 
-  <f.input
-    @attr="place"
-    @as="power-place-autocomplete"
-    @label="Address"
-  />
+  {{#if @fixedLocation}}
+    {{#if @fixedLocation.description}}
+      <div class="form-group">
+        <label>
+          Address
+        </label>
+        <div class="field">
+          <div class="form-control ember-text-field is-disabled">
+            {{@fixedLocation.description}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  {{else}}
+    <f.input
+      @attr="place"
+      @as="power-place-autocomplete"
+      @label="Address"
+    />
+  {{/if}}
 
   {{#each this.sortedFields as |field|}}
     <f.input
@@ -13,7 +28,10 @@
       @label={{field.label}}
       @collection={{field.optionCollection}}
       @wrapper={{field.wrapper}}
+      @color={{field.data.colour}}
     />
+    <!-- {{get this.formData field.key}} -->
+    <!-- <hr/> -->
   {{/each}}
 
   <f.submit class="btn -primary" @text={{if f.builder.isLoading 'Sending...' 'Submit'}} />

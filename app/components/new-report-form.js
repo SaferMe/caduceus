@@ -11,36 +11,40 @@ const FieldsMapping = {
   // 'BulletedList': {inputType: 'pending'},
   // 'Category': {inputType: 'pending'},
   'CheckBox': {inputType: 'checkboxes'},
-  // 'DateAndTime': {inputType: 'pending'},
+  'DateAndTime': {inputType: 'datetime-local'},
   'DropDown': {inputType: 'power-collection'},
   // 'FileUpload': {inputType: 'pending'},
   'FreeText': {inputType: 'void', dontSend: true, unescapeLabel: true, wrapper: 'unstyled'},
   // 'Image': {inputType: 'pending'},
-  // 'IntegerRange': {inputType: 'pending'},
+  'IntegerRange': {inputType: 'ticked-range'},
   'LongTextBox': {inputType: 'text'},
   // 'NumberedList': {inputType: 'pending'},
   'RadioButton': {inputType: 'checkboxes'},
-  // 'RelativePosition': {inputType: 'not needed'},
+  'RelativePosition': {inputType: 'void', dontSend: true, hideLabel: true},
   // 'ReportState': {inputType: 'pending'},
-  // 'ReportViewers': {inputType: 'not needded'},
+  'ReportViewers': {inputType: 'void', dontSend: true, hideLabel: true},
   // 'RiskMatrix': {inputType: 'pending'},
   'SectionBreak': {inputType: 'section-break', hideLabel: true, dontSend: true},
   'ShortTextBox': {inputType: 'string'},
   'Signature': {inputType: 'void', dontSend: true, hideLabel: true},
-  // 'TextWithSuggestions': {inputType: 'pending'},
+
+  // missing suggestions
+  'TextWithSuggestions': {inputType: 'string'},
 }
 
 export default class NewReportFormComponent extends Component {
   @service router;
 
-  validations = {
-    place: [validator('presence', true)],
-  };
+  validations = {};
 
   formData = null;
 
   constructor() {
     super(...arguments);
+
+    if(!this.args.fixedLocation) {
+      this.validations["place"] = [validator('presence', true)];
+    }
 
     let fd = {account_id: this.args.channel.id};
 
@@ -56,7 +60,22 @@ export default class NewReportFormComponent extends Component {
           if (f.mandatory) {
             this.validations[f.key] = [validator('presence', true)];
           }
-          set(fd, f.key, f.value || (f.optionCollection.findBy('is_default') || {}).value);
+          if (f.field_type === "DateAndTime" && get(f.data, 'default_to_current')) {
+            set(fd, f.key, f.value || new Date().toJSON());
+          }
+          else if (f.field_type === "IntegerRange") {
+            this.validations[f.key] = [
+              validator('number', {
+                integer: true,
+                gte: f.data.minimum,
+                lte: f.data.maximum,
+              })
+            ];
+            set(fd, f.key, f.value || f.data.default);
+          }
+          else {
+            set(fd, f.key, f.value || (f.optionCollection.findBy('is_default') || {}).value);
+          }
         }
       }
     });
@@ -113,8 +132,16 @@ export default class NewReportFormComponent extends Component {
       custom_field_values.push({key: key, value: customFields[key]});
     })
 
-    const address = place.description;
-    const geom = `Point(${place.location.lng} ${place.location.lat})`;
+    let address;
+    let geom;
+    if (this.args.fixedLocation) {
+      address = this.args.fixedLocation.description;
+      geom = `Point(${this.args.fixedLocation.location.lng} ${this.args.fixedLocation.location.lat})`;
+    }
+    else {
+      address = place.description;
+      geom = `Point(${place.location.lng} ${place.location.lat})`;
+    }
     const report = {account_id, geom, address, custom_field_values};
 
     let errors;

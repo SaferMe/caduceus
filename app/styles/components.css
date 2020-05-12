@@ -42,6 +42,10 @@
   @apply border-red-300;
 }
 
+.form-group .form-control.is-disabled {
+  @apply border-red-100 bg-gray-100 text-gray-500;
+}
+
 .form-group .form-control:focus,
 .form-group .ember-power-select-trigger--active {
   @apply outline-none;
@@ -76,6 +80,22 @@
 .form-group .form-control input[type=checkbox],
 .form-group .form-control input[type=radio] {
   @apply mr-1;
+}
+
+.form-group .form-control.ticked-range .range-color {
+  @apply p-1 -mx-4 px-4 -mb-2 rounded-b;
+}
+
+.form-group .form-control.ticked-range input[type=range] {
+  @apply w-full align-middle px-1;
+}
+
+.form-group .form-control.ticked-range datalist {
+  @apply flex justify-between text-xs;
+}
+
+.form-group .form-control.ticked-range datalist option {
+  @apply w-6 text-center;
 }
 
 .form-group .invalid-feedback {

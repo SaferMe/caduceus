@@ -23,7 +23,7 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.apiHost = "https://public-api.thundermaps.com";
+  ENV.apiHost = "https://api.prod.saferme.io";
 
   if (environment === 'development') {
     ENV.apiHost = "http://localhost:3000";
